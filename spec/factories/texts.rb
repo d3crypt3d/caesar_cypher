@@ -1,7 +1,6 @@
 FactoryGirl.define do
-  factory :text do
-    input "MyText"
-    output "MyText"
-    shift 1
+  factory :english_text, class: Text do
+    alphabet ('a'..'z').to_a
+    shift 4
   end
 end
