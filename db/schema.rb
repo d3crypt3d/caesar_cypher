@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20160331180730) do
   enable_extension "plpgsql"
 
   create_table "texts", force: :cascade do |t|
-    t.text     "alphabet"
+    t.text     "alphabet",                array: true
     t.integer  "shift"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
