@@ -27,7 +27,7 @@ RSpec.describe "Crypts", :type => :request do
       it { is_expected.to have_http_status(:ok).and have_content_type(:json) }
 
       it "properly encrypts a text" do
-        expect(parse_for(:data)).to eq(proper_response)
+        expect(parse_for(:encrypted)).to eq(proper_response)
       end
     end
   end
@@ -39,7 +39,7 @@ RSpec.describe "Crypts", :type => :request do
       it { is_expected.to have_http_status(:ok).and have_content_type(:json) }
 
       it "properly decrypts a text" do
-        expect(parse_for(:data)).to eq(example_to_receive)
+        expect(parse_for(:plain)).to eq(example_to_receive)
       end
     end
   end

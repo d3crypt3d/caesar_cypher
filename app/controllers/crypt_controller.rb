@@ -8,7 +8,7 @@ class CryptController < ApplicationController
       memo + @rot_alphabet[ind]
     end
     
-    render json: {data: output}, status: :ok
+    render json: {plain: @text, encrypted: output}, status: :ok
   end
  
   def decrypt
@@ -17,7 +17,7 @@ class CryptController < ApplicationController
       memo + @alphabet[ind]
     end  
 
-    render json: {data: output}, status: :ok
+    render json: {plain: output, encrypted: @text}, status: :ok
   end
 
   private
@@ -25,7 +25,7 @@ class CryptController < ApplicationController
     @text, shifted_range = crypt_params.values_at(:text, :shift)
     @alphabet = Text.english_alphabet
     @alph_length = @alphabet.length
-    @rot_alphabet = @alphabet.rotate(shifted_range)
+    @rot_alphabet = @alphabet.rotate(shifted_range.to_i)
   end
 
   def crypt_params
