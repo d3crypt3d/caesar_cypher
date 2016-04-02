@@ -30,6 +30,12 @@ RSpec.describe "Crypts", :type => :request do
         expect(parse_for(:encrypted)).to eq(proper_response)
       end
     end
+
+    context 'with invalid attributes' do
+      before { make_request :post, encrypt_path, example, mime_accept: Mime::XML }
+
+      it { is_expected.to have_http_status(422) }
+    end
   end
 
   describe "POST #decrypt" do
@@ -41,6 +47,14 @@ RSpec.describe "Crypts", :type => :request do
       it "properly decrypts a text" do
         expect(parse_for(:plain)).to eq(example_to_receive)
       end
+    end
+
+    context 'with invalid attributes' do
+      before do
+        make_request :post, decrypt_path, proper_response_to_send, mime_accept: Mime::XML
+      end
+
+      it { is_expected.to have_http_status(422) }
     end
   end
 end
