@@ -41,6 +41,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1.1'
   gem 'factory_girl_rails'
   gem 'ffaker'
+  gem "bower-rails", "~> 0.10.0"
 end
 
 group :development do
