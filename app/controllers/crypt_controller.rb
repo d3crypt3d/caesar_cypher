@@ -1,14 +1,15 @@
 class CryptController < ApplicationController
   before_action :set_crypt_vars
-  respond_to :json
 
   def encrypt
     output= @text.split('').inject('') do |memo, char|
       ind = @alphabet.index(char)
       memo + @rot_alphabet[ind]
     end
-    
-    render json: {plain: @text, encrypted: output}, status: :ok
+
+    respond_to do |format|
+      format.json { render json: {plain: @text, encrypted: output}, status: :ok }
+    end
   end
  
   def decrypt
@@ -17,7 +18,9 @@ class CryptController < ApplicationController
       memo + @alphabet[ind]
     end  
 
-    render json: {plain: output, encrypted: @text}, status: :ok
+    respond_to do |format|
+      format.json { render json: {plain: output, encrypted: @text}, status: :ok }
+    end
   end
 
   private

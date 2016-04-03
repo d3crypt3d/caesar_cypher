@@ -34,7 +34,7 @@ RSpec.describe "Crypts", :type => :request do
     context 'with invalid attributes' do
       before { make_request :post, encrypt_path, example, mime_accept: Mime::XML }
 
-      it { is_expected.to have_http_status(422) }
+      it { is_expected.to have_http_status(422).and have_content_type(:json) }
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe "Crypts", :type => :request do
         make_request :post, decrypt_path, proper_response_to_send, mime_accept: Mime::XML
       end
 
-      it { is_expected.to have_http_status(422) }
+      it { is_expected.to have_http_status(422).and have_content_type(:json) }
     end
   end
 end
