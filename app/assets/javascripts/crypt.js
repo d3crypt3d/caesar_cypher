@@ -3,6 +3,7 @@
 angular.module('crypt', [])
 .controller('MainCtrl', ['$http', function($http) {
   var self = this;
+  self.validate = /^\d{1,3}$/;
   self.encrypt = function() {
     $http.post('/encrypt',
                {'crypt': {'text': self.plain, 'shift':self.rot}})

@@ -11,11 +11,12 @@
         %textarea{class: 'form-control', rows: 5, id: 'plain-text', 'ng-model'=> 'ctrl.plain'}
     .col-md-2.center.text-center
       .wrapper
-        .input-group
-          %span.input-group-addon#rot ROT {{ctrl.rot}}
-          %input.form-control{type: 'text', 'ng-model'=> 'ctrl.rot', 'aria-describedby'=> 'rot'}
-        %button.btn.btn-xs.btn-primary.btn-arrow-left{type: 'button', 'ng-click'=> 'ctrl.decrypt()'} Decrypt
-        %button.btn.btn-xs.btn-warning.btn-arrow-right{type: 'button', 'ng-click'=> 'ctrl.encrypt()'} Encrypt
+        %form{name: 'cryptForm', novalidate: true}
+          .input-group
+            %span.input-group-addon#rot ROT {{ctrl.rot}}
+            %input.form-control{type: 'text', 'ng-model'=> 'ctrl.rot', 'ng-pattern'=> 'ctrl.validate', 'aria-describedby'=> 'rot', required: true}
+          %button.btn.btn-xs.btn-primary.btn-arrow-left{type: 'button', 'ng-click'=> 'ctrl.decrypt()', 'ng-disabled'=> 'cryptForm.$invalid'} Decrypt
+          %button.btn.btn-xs.btn-warning.btn-arrow-right{type: 'button', 'ng-click'=> 'ctrl.encrypt()', 'ng-disabled'=> 'cryptForm.$invalid'} Encrypt
     .col-md-5
       .form-group
         %label{for: 'encrypted-text'} Encrypted text:

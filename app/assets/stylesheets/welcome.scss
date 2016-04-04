@@ -19,6 +19,17 @@
   }
 }
 
+.wrapper {
+  input.ng-invalid.ng-dirty {
+    border-color: #FA787E;
+    box-shadow: rgba(250, 128, 126, 0.6) 0px 0px 8px 0px;
+  }
+  input.ng-valid.ng-dirty {
+    border-color: #78FA89;
+    box-shadow: rgba(120, 250, 137, 0.6) 0px 0px 8px 0px;
+  }
+}
+
 @media (min-width: 992px) {
   .btn-arrow-right,
   .btn-arrow-left {
