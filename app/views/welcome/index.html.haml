@@ -1,2 +1,24 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
+.container
+  %h1.visible-xs Extra small screen
+  %h1.visible-sm Small screen
+  %h1.visible-md Medium screen
+  %h1.visible-lg Large screen
+  %hr
+  .row
+    .col-md-5
+      .form-group
+        %label{for: 'plain-text'} Plain text:
+        %textarea{class: 'form-control', rows: 5, id: 'plain-text'}
+    .col-md-2.center.text-center
+      .wrapper
+        .input-group
+          %span.input-group-addon#rot ROT {{ROT}}
+          %input.form-control{type: 'text', 'ng-model'=> 'ROT', 'aria-describedby'=> 'rot'}
+        %button.btn.btn-xs.btn-primary.btn-arrow-left{type: 'button'} Decrypt
+        %button.btn.btn-xs.btn-warning.btn-arrow-right{type: 'button'} Encrypt
+    .col-md-5
+      .form-group
+        %label{for: 'encrypted-text'} Encrypted text:
+        %textarea{class: 'form-control', rows: 5, id: 'encrypted-text'}
+  .row
+  .row
