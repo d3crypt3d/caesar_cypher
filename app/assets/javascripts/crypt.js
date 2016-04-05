@@ -20,8 +20,27 @@ angular.module('crypt', ['ui.chart'])
         self.encrypted = '';
       });
   };
+  self.cryptChart = [[
+    ['Foo', 12], ['Bar', 9], ['Baz', 14], ['Qux', 16], ['Zoo', 7]
+  ]];
+  self.chartOptions = {
+    title: 'Frequency analisys',
+    seriesDefaults: {
+      // Make this a Bar chart
+      renderer: jQuery.jqplot.BarRenderer,
+      rendererOptions: {
+        varyBarColor: true
+      }
+    },
+    axes: {
+      xaxis: {
+        renderer: jQuery.jqplot.CategoryAxisRenderer
+      }
+    }
+  };
 }])
 .config(['$httpProvider', function($httpProvider) {
   $httpProvider.defaults.headers.common['Accept'] = 'application/json';
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
 }]);
+
