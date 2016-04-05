@@ -33,6 +33,8 @@ gem 'twitter-bootstrap-rails'
 
 gem 'responders', '~> 2.1.1'
 gem 'haml'
+gem "bower-rails", "~> 0.10.0"
+gem 'ffaker'
 
 group :development, :test do
   gem 'pry-byebug'
@@ -45,8 +47,6 @@ group :development, :test do
   gem 'rspec-its', '~> 1.0.1'
   gem 'shoulda-matchers', '~> 3.1.1'
   gem 'factory_girl_rails'
-  gem 'ffaker'
-  gem "bower-rails", "~> 0.10.0"
 end
 
 group :development do
