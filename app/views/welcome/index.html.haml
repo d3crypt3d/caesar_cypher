@@ -22,9 +22,9 @@
         %label{for: 'encrypted-text'} Encrypted text:
         %textarea{class: 'form-control', rows: 5, id: 'encrypted-text', 'ng-model'=> 'ctrl.encrypted'}
   .row
-    .col-md-12.text-center.chart
+    .col-md-12.chart
       %div{'ui-chart'=> 'ctrl.cryptChart', 'chart-options'=> 'ctrl.chartOptions'}
   .row
     .col-md-12
-      .well
+      .well.custom
         = FFaker::Lorem.paragraph
