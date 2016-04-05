@@ -1,6 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-angular.module('crypt', [])
+angular.module('crypt', ['ui.chart'])
 .controller('MainCtrl', ['$http', function($http) {
   var self = this;
   self.validate = /^\d{1,3}$/;

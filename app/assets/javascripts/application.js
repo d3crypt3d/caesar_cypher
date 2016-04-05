@@ -4,8 +4,13 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
+//= require jquery2
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require angular
+//= require jqplot/jquery.jqplot.min
+//= require jqplot/excanvas.min
+//= require jqplot/plugins/jqplot.categoryAxisRenderer.min
+//= require jqplot/plugins/jqplot.barRenderer.min
+//= require angular-ui-chart/src/chart
 //= require_tree .
