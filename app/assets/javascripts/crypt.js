@@ -50,6 +50,11 @@ angular.module('crypt', ['ui.chart'])
     }
   };
 }])
+.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.defaults.headers.common['Accept'] = 'application/json';
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+}]);
+
 //.factory('HelperMethods', [function() {
 //  return {
 //    populateArray: function(response) {
@@ -59,8 +64,3 @@ angular.module('crypt', ['ui.chart'])
 //    }
 //  };
 //}])
-.config(['$httpProvider', function($httpProvider) {
-  $httpProvider.defaults.headers.common['Accept'] = 'application/json';
-  $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
-}]);
-
