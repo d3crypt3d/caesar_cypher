@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActionController::UnknownFormat, with: :unknown_format
 
   private
+
   def unknown_format
-    render json: {error: 'unsupported format is requested'}, status: 422
+    render json: { error: 'unsupported format is requested' }, status: :unprocessable_entity
   end
 end

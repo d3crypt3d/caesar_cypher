@@ -30,7 +30,7 @@ gem "less-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'twitter-bootstrap-rails'
-
+gem 'active_attr'
 gem 'responders', '~> 2.1.1'
 gem 'haml'
 gem "bower-rails", "~> 0.10.0"
