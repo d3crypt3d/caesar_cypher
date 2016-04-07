@@ -7,25 +7,31 @@
   .row
     .col-md-5
       .form-group
-        %label{for: 'plain-text'} Plain text:
-        %textarea.form-control.custom-font#plain-text{rows: 5, 'ng-model'=> 'ctrl.plain'}
+        %label{for: 'plain-text'} Source:
+        %textarea.form-control.custom-font#plain-text{rows: 5, 'ng-model'=> 'ctrl.sourceData'}
     .col-md-2.center.text-center
       .wrapper.text-center
         %form#cryptForm{name: 'cryptForm', novalidate: true}
           / Visible om small and extra small screens
-          %span.btn.btn-xs.fa.fa-2x.fa-arrow-up.visible-sm.visible-xs.small-arrow-left{'ng-click'=> 'ctrl.decrypt()','ng-disabled'=> 'cryptForm.$invalid'}
+          %span.btn.btn-xs.fa.fa-2x.fa-key.visible-sm.visible-xs.small-arrow-left{'ng-click'=> 'ctrl.decrypt()',
+            'ng-disabled'=> 'cryptForm.$invalid'}
           .rot-container
             .input-group
               %span.input-group-addon#rot ROT {{ctrl.rot || 0}}
-              %input.form-control.text-center{type: 'text', 'ng-model'=> 'ctrl.rot', 'ng-pattern'=> 'ctrl.validate', 'aria-describedby'=> 'rot', required: true}
-          %span.btn.btn-xs.fa.fa-2x.fa-arrow-down.visible-sm.visible-xs.small-arrow-right{'ng-click'=> 'ctrl.encrypt()', 'ng-disabled'=> 'cryptForm.$invalid'}
+              %input.form-control.text-center{type: 'text', 'ng-model'=> 'ctrl.rot',
+                'ng-pattern'=> 'ctrl.validate', 'aria-describedby'=> 'rot', required: true}
+          %span.btn.btn-xs.fa.fa-2x.fa-lock.visible-sm.visible-xs.small-arrow-right{'ng-click'=> 'ctrl.encrypt()',
+            'ng-disabled'=> 'cryptForm.$invalid'}
           / Hidden on small and extra small screens
-          %button.btn.btn-xs.btn-primary.btn-arrow-left.hidden-xs.hidden-sm{type: 'button', 'ng-click'=> 'ctrl.decrypt()', 'ng-disabled'=> 'cryptForm.$invalid'} Decrypt
-          %button.btn.btn-xs.btn-warning.btn-arrow-right.hidden-xs.hidden-sm{type: 'button', 'ng-click'=> 'ctrl.encrypt()', 'ng-disabled'=> 'cryptForm.$invalid'} Encrypt
+          %button.btn.btn-xs.btn-primary.btn-arrow-left.hidden-xs.hidden-sm{type: 'button',
+            'ng-click'=> 'ctrl.decrypt()', 'ng-disabled'=> 'cryptForm.$invalid'} Decrypt
+          %button.btn.btn-xs.btn-warning.btn-arrow-right.hidden-xs.hidden-sm{type: 'button',
+            'ng-click'=> 'ctrl.encrypt()', 'ng-disabled'=> 'cryptForm.$invalid'} Encrypt
     .col-md-5
       .form-group
-        %label{for: 'encrypted-text'} Encrypted text:
-        %textarea.form-control.custom-font#plain-text{rows: 5, 'ng-model'=> 'ctrl.encrypted'}
+        %label{for: 'encrypted-text'} Result:
+        %textarea.form-control.custom-font#plain-text{rows: 5,
+          'ng-model'=> 'ctrl.result', readonly: true}
   .row
     .col-md-12.chart
       %div{'ui-chart'=> 'ctrl.cryptChart', 'chart-options'=> 'ctrl.chartOptions'}

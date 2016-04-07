@@ -5,28 +5,30 @@ angular.module('crypt', ['ui.chart'])
   var self = this;
 
   function helperMethod(response) {
+    self.result = response.data.data;
     var frequencyArr = response.data.frequency;
     var frequencyArrLength = frequencyArr.length;
     if (frequencyArrLength) self.cryptChart = [frequencyArr]; 
   }
 
+  function processResponse(response) {
+    self.result = response.data.data;
+    helperMethod(response);
+  }
+
   self.validate = /^\d{1,3}$/;
   self.encrypt = function() {
     $http.post('/encrypt',
-               {'crypt': {'text': self.plain, 'shift':self.rot}})
+               {'crypt': {'text': self.sourceData, 'shift':self.rot}})
       .then(function(response) {
-        self.encrypted = response.data.encrypted;
-        self.plain = '';
         helperMethod(response);
         //HelperMethods.populateArray(response);
       });
   };
   self.decrypt = function() {
     $http.post('/decrypt',
-               {'crypt': {'text': self.encrypted, 'shift':self.rot}})
+               {'crypt': {'text': self.sourceData, 'shift':self.rot}})
       .then(function(response) {
-        self.plain = response.data.plain;
-        self.encrypted = '';
         helperMethod(response);
         //HelperMethods.populateArray(response);
       });
