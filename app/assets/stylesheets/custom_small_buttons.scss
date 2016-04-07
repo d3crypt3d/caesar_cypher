@@ -3,36 +3,36 @@
 $flat-blue: #2980b9;
 $flat-orange: #e67e22;
 
-.small-arrow-left,
-.small-arrow-right {
+#sm-decrypt-button,
+#sm-encrypt-button {
     position: relative;
    top: -13px; /* an icon is slightly shorter than it's container */
     cursor: pointer;
 }
 
-.small-arrow-left {
+#sm-decrypt-button {
   color: $flat-blue;
   border-color: darken($flat-blue, 10%);
 } 
 
-.small-arrow-right {
+#sm-encrypt-button {
   color: $flat-orange;
   border-color: darken($flat-orange, 10%);
 }
 
-.small-arrow-left:hover {
+#sm-decrypt-button:hover {
   color: darken($flat-blue, 10%);
   border-color: darken($flat-blue, 10%);
 }
 
-.small-arrow-right:hover {
+#sm-encrypt-button:hover {
   color: darken($flat-orange, 10%);
   border-color: darken($flat-orange, 10%);
 }
 
 @media (max-width: 992px) {
-  .small-arrow-left,
-  .small-arrow-right,
+  #sm-decrypt-button,
+  #sm-encrypt-button,
   .rot-container {
     display: inline-block !important;
   }

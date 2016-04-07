@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Texts" do
+feature 'Texts' do
   include_context 'shared_lets'
 
   # We use helper lets from shared context, where:

@@ -5,22 +5,22 @@
   %h1.visible-lg Large screen
   %hr
   .row
-    .col-md-5
-      .form-group
-        %label{for: 'plain-text'} Source:
-        %textarea.form-control.custom-font#source-text{rows: 5, 'ng-model'=> 'ctrl.sourceData'}
-    .col-md-2.center.text-center
-      .wrapper.text-center
-        %form#cryptForm{name: 'cryptForm', novalidate: true}
+    %form#crypt-form{name: 'crypt-form', novalidate: true}
+      .col-md-5
+        .form-group
+          %label{for: 'plain-text'} Source:
+          %textarea.form-control.custom-font#source-text{rows: 5, 'ng-model'=> 'ctrl.sourceData', required: true}
+      .col-md-2.center.text-center
+        .wrapper.text-center
           / Visible om small and extra small screens
-          %span.btn.btn-xs.fa.fa-2x.fa-key.visible-sm.visible-xs.small-arrow-left#sm-decrypt-button{'ng-click'=> 'ctrl.decrypt()',
+          %span.btn.btn-xs.fa.fa-2x.fa-key.visible-sm.visible-xs#sm-decrypt-button{'ng-click'=> 'ctrl.decrypt()',
             'ng-disabled'=> 'cryptForm.$invalid'}
           .rot-container
             .input-group
               %span.input-group-addon#rot ROT {{ctrl.rot || 0}}
               %input.form-control.text-center#rot-input{type: 'text', 'ng-model'=> 'ctrl.rot',
                 'ng-pattern'=> 'ctrl.validate', 'aria-describedby'=> 'rot', required: true}
-          %span.btn.btn-xs.fa.fa-2x.fa-lock.visible-sm.visible-xs.small-arrow-right#sm-encrypt-button{'ng-click'=> 'ctrl.encrypt()',
+          %span.btn.btn-xs.fa.fa-2x.fa-lock.visible-sm.visible-xs#sm-encrypt-button{'ng-click'=> 'ctrl.encrypt()',
             'ng-disabled'=> 'cryptForm.$invalid'}
           / Hidden on small and extra small screens
           %button.btn.btn-xs.btn-primary.btn-arrow-left.hidden-xs.hidden-sm#decrypt-button{type: 'button',
