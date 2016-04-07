@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Crypts' do
-  let(:example) { { 'crypt' => { 'text' => 'Lorem epsum', 'shift' => 4 } } }
-  let(:proper_response) { 'Psviq$itwyq' }
+  include_context 'shared_lets'
+
   let(:proper_response_to_send) do
     # clone only duplicates the main object, inner object remains the same
     example.deep_dup.tap { |obj| obj['crypt']['text'] = proper_response }
   end
-  let(:example_to_receive) { example['crypt']['text'] }
 
   subject { response }
 
@@ -39,7 +38,7 @@ RSpec.describe 'Crypts' do
       it { is_expected.to have_http_status(:ok).and have_content_type(:json) }
 
       it 'properly decrypts a text' do
-        expect(parse_for(:data)).to eq(example_to_receive)
+        expect(parse_for(:data)).to eq(plain_example)
       end
     end
 
