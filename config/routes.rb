@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   post '/encrypt', to: 'crypt#encrypt'
-
   post '/decrypt', to: 'crypt#decrypt'
 
   # The priority is based upon order of creation: first created -> highest priority.

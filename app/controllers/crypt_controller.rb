@@ -6,7 +6,7 @@
 # and an amount of this char in a text. Depending on the controller
 # the data in a response object differs. A response from the encrypt
 # action would contain the encrypted text and it's frequency analysis.
-# Decrypt action, in turn, would the opposite data.
+# Decrypt action, in turn, would produce the opposite data.
 class CryptController < ApplicationController
   def index
   end
@@ -16,7 +16,7 @@ class CryptController < ApplicationController
       format.json { render json: Text.process_data(:encrypt, crypt_params) }
     end
   end
- 
+
   def decrypt
     respond_to do |format|
       format.json { render json: Text.process_data(:decrypt, crypt_params) }

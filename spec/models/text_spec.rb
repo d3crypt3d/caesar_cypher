@@ -1,5 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Text, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Text do
+  subject { FactoryGirl.build(:text) }
+
+  it { should respond_to(:data) }  
+  it { should respond_to(:frequency) }  
 end
