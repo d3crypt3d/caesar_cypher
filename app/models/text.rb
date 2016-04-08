@@ -2,25 +2,18 @@
 # mixin). It keeps all the business logic to perform both
 # encryption and decryption transformations. CHAR_TABLE
 # constant keeps a piece of unicode char table with latin
-# letters, numbers and punctuation marks:
+# letters:
 #
-# [" ", "!", "\"", "#", "$", "%", "&", "'", "(", ")",
-#  "*", "+", ",", "-", ".", "/", "0", "1", "2", "3",
-#  "4", "5", "6", "7", "8", "9", ":", ";", "<", "=",
-#  ">", "?", "@", "A", "B", "C", "D", "E", "F", "G",
-#  "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
-#  "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[",
-#  "\\", "]", "^", "_", "`", "a", "b", "c", "d", "e",
-#  "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
-#  "p", "q", "r", "s", "t", "u", "v", "w", "x", "y",
-#  "z", "{", "|", "}", "~"]
+#  ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+#   "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+#   "u", "v", "w", "x", "y", "z"]
 #
 # The factory method is used to instantiate data objects
 # with processed text and supplemental frequency analysis.
 class Text
   include ActiveAttr::Model
 
-  CHAR_TABLE = (32..126).map(&:chr)
+  CHAR_TABLE = (97..122).map(&:chr)
 
   attribute :data
   attribute :frequency
@@ -29,21 +22,33 @@ class Text
     text, shifted_range = input_params.values_at(:text, :shift)
     text ||= ''
     rot_table = CHAR_TABLE.rotate(shifted_range.to_i)
-    splitted_text = text.split('')
+    # remain only letters and spaces, remove numbers
+    # and punctuation marks
+    splitted_text = text.downcase.gsub(/[^a-z\s]/,'').split('')
 
     output = case action
              when :encrypt
                splitted_text.inject('') do |memo, char|
-                 # If someone uses another but english layout
-                 # the character would not be found in a table
-                 # 0 is a fallback
-                 ind = CHAR_TABLE.index(char) || 0
-                 memo + rot_table[ind]
+                 result = if char == ' '
+                            char
+                          else
+                            # If someone uses another but english layout
+                            # the character would not be found in a table
+                            # 0 is a fallback
+                            ind = CHAR_TABLE.index(char) || 0
+                            rot_table[ind]
+                          end
+                 memo + result
                end
              when :decrypt
                splitted_text.inject('') do |memo, char|
-                 ind = rot_table.index(char) || 0
-                 memo + CHAR_TABLE[ind]
+                 result = if char == ' '
+                            char
+                          else
+                            ind = rot_table.index(char) || 0
+                            CHAR_TABLE[ind]
+                          end
+                 memo + result
                end
              end
 
