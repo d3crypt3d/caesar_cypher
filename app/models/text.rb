@@ -21,45 +21,40 @@ class Text
   def self.process_data(action, input_params)
     text, shifted_range = input_params.values_at(:text, :shift)
     text ||= ''
-    rot_table = CHAR_TABLE.rotate(shifted_range.to_i)
+    @rot_table = CHAR_TABLE.rotate(shifted_range.to_i)
     # remain only letters and spaces, remove numbers
     # and punctuation marks
-    splitted_text = text.downcase.gsub(/[^a-z\s]/,'').split('')
+    splitted_text = text.downcase.gsub(/[^a-z\s]/, '').split
+    # Process word by word
+    output = splitted_text.map do |i|
+      # Process letter by letter
+      i.split('').inject('',
+                         &(action == :encrypt ? method(:encrypt) : method(:decrypt)))
+    end
 
-    output = case action
-             when :encrypt
-               splitted_text.inject('') do |memo, char|
-                 result = if char == ' '
-                            char
-                          else
-                            # If someone uses another but english layout
-                            # the character would not be found in a table
-                            # 0 is a fallback
-                            ind = CHAR_TABLE.index(char) || 0
-                            rot_table[ind]
-                          end
-                 memo + result
-               end
-             when :decrypt
-               splitted_text.inject('') do |memo, char|
-                 result = if char == ' '
-                            char
-                          else
-                            ind = rot_table.index(char) || 0
-                            CHAR_TABLE[ind]
-                          end
-                 memo + result
-               end
-             end
-
+    output = output.join(' ')
     new(data: output, frequency: frequency_analisys(output))
   end
 
+  def self.encrypt(m, i)
+    # If someone uses another but english layout
+    # the character would not be found in a table
+    # 0 is a fallback
+    ind = CHAR_TABLE.index(i) || 0
+    m + @rot_table[ind]
+  end
+
+  def self.decrypt(m, i)
+    ind = @rot_table.index(i) || 0
+    m + CHAR_TABLE[ind]
+  end
+
   def self.frequency_analisys(input_text)
-    input_text.split('').group_by { |x| x }.inject([]) do |memo, i|
+    # Remove spaces - we don't need them on chart
+    input_text.delete(' ').split('').group_by { |x| x }.inject([]) do |memo, i|
       memo << [i[0], i[1].length]
     end
   end
 
-  private_class_method :new, :frequency_analisys
+  private_class_method :new, :encrypt, :decrypt, :frequency_analisys
 end
